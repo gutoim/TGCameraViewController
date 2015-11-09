@@ -139,7 +139,7 @@
 - (void)saveJPGImageAtDocumentDirectory:(UIImage *)image resultBlock:(TGAssetsResultCompletion)resultBlock failureBlock:(TGAssetsFailureCompletion)failureBlock
 {
     NSDateFormatter *dateFormatter = [NSDateFormatter new];
-    [dateFormatter setDateFormat:@"yyyy-MM-dd_HH:mm:SSSSZ"];
+    [dateFormatter setDateFormat:@"yyyy-MM-dd-HH-mm-SSSS"];
     
     NSString *directory = [self directory];
     
