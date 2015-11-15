@@ -31,8 +31,6 @@
 #import "UIImage+CameraFilters.h"
 #import "TGTintedButton.h"
 
-#import "SelectRestaurantViewController.h"
-
 static NSString* const kTGCacheSatureKey = @"TGCacheSatureKey";
 static NSString* const kTGCacheCurveKey = @"TGCacheCurveKey";
 static NSString* const kTGCacheVignetteKey = @"TGCacheVignetteKey";
@@ -143,11 +141,11 @@ static NSString* const kTGCacheVignetteKey = @"TGCacheVignetteKey";
         
         _photo = _photoView.image;
         
-//        if (_albumPhoto) {
-//            [_delegate cameraDidSelectAlbumPhoto:_photo];
-//        } else {
-//            [_delegate cameraDidTakePhoto:_photo];
-//        }
+        if (_albumPhoto) {
+            [_delegate cameraDidSelectAlbumPhoto:_photo];
+        } else {
+            [_delegate cameraDidTakePhoto:_photo];
+        }
         
         ALAuthorizationStatus status = [ALAssetsLibrary authorizationStatus];
         TGAssetsLibrary *library = [TGAssetsLibrary defaultAssetsLibrary];
@@ -176,12 +174,6 @@ static NSString* const kTGCacheVignetteKey = @"TGCacheVignetteKey";
             }
         }
     }
-    
-    
-    SelectRestaurantViewController *selectRestaurantViewController = [[SelectRestaurantViewController alloc] init];
-    [self.navigationController pushViewController:selectRestaurantViewController animated:YES];
-    
-    
 }
 
 - (IBAction)filtersTapped
