@@ -84,7 +84,11 @@
     return NO;
 }
 
+#if __IPHONE_OS_VERSION_MAX_ALLOWED < __IPHONE_9_0
 - (NSUInteger)supportedInterfaceOrientations
+#else
+- (UIInterfaceOrientationMask)supportedInterfaceOrientations
+#endif
 {
     return UIInterfaceOrientationMaskPortrait;
 }
@@ -94,7 +98,7 @@
 
 - (void)setupAuthorizedWithDelegate:(id<TGCameraDelegate>)delegate
 {
-    TGCameraViewController *viewController = [TGCameraViewController new];
+    TGCameraViewController *viewController = [[TGCameraViewController alloc] init];
     viewController.delegate = delegate;
     
     self.viewControllers = @[viewController];
@@ -102,7 +106,7 @@
 
 - (void)setupDenied
 {
-    UIViewController *viewController = [TGCameraAuthorizationViewController new];
+    UIViewController *viewController = [[TGCameraAuthorizationViewController alloc] init];
     self.viewControllers = @[viewController];
 }
 

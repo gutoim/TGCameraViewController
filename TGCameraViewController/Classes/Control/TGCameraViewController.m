@@ -38,9 +38,10 @@
 @property (strong, nonatomic) IBOutlet UIImageView *bottomRightView;
 @property (strong, nonatomic) IBOutlet UIView *separatorView;
 @property (strong, nonatomic) IBOutlet UIView *actionsView;
-@property (strong, nonatomic) IBOutlet UIButton *gridButton;
-@property (strong, nonatomic) IBOutlet UIButton *toggleButton;
-@property (strong, nonatomic) IBOutlet UIButton *shotButton;
+@property (strong, nonatomic) IBOutlet TGTintedButton *closeButton;
+@property (strong, nonatomic) IBOutlet TGTintedButton *gridButton;
+@property (strong, nonatomic) IBOutlet TGTintedButton *toggleButton;
+@property (strong, nonatomic) IBOutlet TGTintedButton *shotButton;
 @property (strong, nonatomic) IBOutlet TGTintedButton *albumButton;
 @property (strong, nonatomic) IBOutlet UIButton *flashButton;
 @property (strong, nonatomic) IBOutlet TGCameraSlideView *slideUpView;
@@ -61,7 +62,6 @@
 - (IBAction)handleTapGesture:(UITapGestureRecognizer *)recognizer;
 
 - (void)deviceOrientationDidChangeNotification;
-- (void)latestPhoto;
 - (AVCaptureVideoOrientation)videoOrientationForDeviceOrientation:(UIDeviceOrientation)deviceOrientation;
 - (void)viewWillDisappearWithCompletion:(void (^)(void))completion;
 
@@ -71,6 +71,11 @@
 
 @implementation TGCameraViewController
 
+- (instancetype)init
+{
+    return [super initWithNibName:NSStringFromClass(self.class) bundle:[NSBundle bundleForClass:self.class]];
+}
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
@@ -79,9 +84,20 @@
         _topViewHeight.constant = 0;
     }
     
-    if ([[TGCamera getOption:kTGCameraOptionHiddenToggleButton] boolValue] == YES) {
-        _toggleButton.hidden = YES;
-        _toggleButtonWidth.constant = 0;
+    NSArray *devices = [AVCaptureDevice devicesWithMediaType:AVMediaTypeVideo];
+    if (devices.count > 1) {
+        
+        if ([[TGCamera getOption:kTGCameraOptionHiddenToggleButton] boolValue] == YES) {
+            _toggleButton.hidden = YES;
+            _toggleButtonWidth.constant = 0;
+        }
+    }
+    else {
+        
+        if ([[TGCamera getOption:kTGCameraOptionHiddenToggleButton] boolValue] == YES) {
+            _toggleButton.hidden = YES;
+            _toggleButtonWidth.constant = 0;
+        }
     }
     
     if ([[TGCamera getOption:kTGCameraOptionHiddenAlbumButton] boolValue] == YES) {
@@ -91,6 +107,12 @@
     [_albumButton.layer setCornerRadius:10.f];
     [_albumButton.layer setMasksToBounds:YES];
     
+    NSBundle *bundle = [NSBundle bundleForClass:self.class];
+    [_closeButton setImage:[UIImage imageNamed:@"CameraClose" inBundle:bundle compatibleWithTraitCollection:nil] forState:UIControlStateNormal];
+    [_shotButton setImage:[UIImage imageNamed:@"CameraShot" inBundle:bundle compatibleWithTraitCollection:nil] forState:UIControlStateNormal];
+    [_albumButton setImage:[UIImage imageNamed:@"CameraRoll" inBundle:bundle compatibleWithTraitCollection:nil] forState:UIControlStateNormal];
+    [_gridButton setImage:[UIImage imageNamed:@"CameraGrid" inBundle:bundle compatibleWithTraitCollection:nil] forState:UIControlStateNormal];
+    [_toggleButton setImage:[UIImage imageNamed:@"CameraToggle" inBundle:bundle compatibleWithTraitCollection:nil] forState:UIControlStateNormal];
     
     _camera = [TGCamera cameraWithFlashButton:_flashButton];
     
@@ -125,6 +147,8 @@
     _shotButton.enabled =
     _albumButton.enabled =
     _flashButton.enabled = NO;
+    
+    [_camera startRunning];
 }
 
 - (void)viewDidAppear:(BOOL)animated
@@ -132,8 +156,6 @@
     [super viewDidAppear:animated];
     
     [self deviceOrientationDidChangeNotification];
-    
-    [_camera startRunning];
     
     _separatorView.hidden = YES;
     
@@ -156,13 +178,6 @@
         _wasLoaded = YES;
         [_camera insertSublayerWithCaptureView:_captureView atRootView:self.view];
     }
-    
-    // get the latest image from the album
-    ALAuthorizationStatus status = [ALAssetsLibrary authorizationStatus];
-    if (status != ALAuthorizationStatusDenied) {
-        // access to album is authorised
-        [self latestPhoto];
-    }
 }
 
 - (void)viewDidDisappear:(BOOL)animated
@@ -182,25 +197,6 @@
 - (BOOL)prefersStatusBarHidden
 {
     return YES;
-}
-
-- (void)dealloc
-{
-    _captureView = nil;
-    _topLeftView = nil;
-    _topRightView = nil;
-    _bottomLeftView = nil;
-    _bottomRightView = nil;
-    _separatorView = nil;
-    _actionsView = nil;
-    _gridButton = nil;
-    _toggleButton = nil;
-    _shotButton = nil;
-    _albumButton = nil;
-    _flashButton = nil;
-    _slideUpView = nil;
-    _slideDownView = nil;
-    _camera = nil;
 }
 
 #pragma mark -
@@ -250,13 +246,24 @@
     UIDeviceOrientation deviceOrientation = [[UIDevice currentDevice] orientation];
     AVCaptureVideoOrientation videoOrientation = [self videoOrientationForDeviceOrientation:deviceOrientation];
     
+    dispatch_group_t group = dispatch_group_create();
+    __block UIImage *photo;
+    
+    dispatch_group_enter(group);
     [self viewWillDisappearWithCompletion:^{
-        [_camera takePhotoWithCaptureView:_captureView videoOrientation:videoOrientation cropSize:_captureView.frame.size
-                               completion:^(UIImage *photo) {
-                                   TGPhotoViewController *viewController = [TGPhotoViewController newWithDelegate:_delegate photo:photo];
-                                   [self.navigationController pushViewController:viewController animated:YES];
-                               }];
+        dispatch_group_leave(group);
     }];
+    
+    dispatch_group_enter(group);
+    [_camera takePhotoWithCaptureView:_captureView videoOrientation:videoOrientation cropSize:_captureView.frame.size completion:^(UIImage *_photo) {
+        photo = _photo;
+        dispatch_group_leave(group);
+    }];
+    
+    dispatch_group_notify(group, dispatch_get_main_queue(), ^{
+        TGPhotoViewController *viewController = [TGPhotoViewController newWithDelegate:_delegate photo:photo];
+        [self.navigationController pushViewController:viewController animated:YES];
+    });
 }
 
 - (IBAction)albumTapped
@@ -318,17 +325,6 @@
         _toggleButton.transform =
         _albumButton.transform =
         _flashButton.transform = transform;
-    }];
-}
-
--(void)latestPhoto
-{
-    TGAssetsLibrary *library = [TGAssetsLibrary defaultAssetsLibrary];
-    
-    __weak __typeof(self)wSelf = self;
-    [library latestPhotoWithCompletion:^(UIImage *photo) {
-        wSelf.albumButton.disableTint = YES;
-        [wSelf.albumButton setImage:photo forState:UIControlStateNormal];
     }];
 }
 

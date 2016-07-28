@@ -44,6 +44,8 @@ static NSString* const kTGCacheVignetteKey = @"TGCacheVignetteKey";
 @property (strong, nonatomic) IBOutlet TGCameraFilterView *filterView;
 @property (strong, nonatomic) IBOutlet UIButton *defaultFilterButton;
 @property (weak, nonatomic) IBOutlet TGTintedButton *filterWandButton;
+@property (weak, nonatomic) IBOutlet TGTintedButton *cancelButton;
+@property (weak, nonatomic) IBOutlet TGTintedButton *confirmButton;
 
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *topViewHeight;
 
@@ -95,6 +97,11 @@ static NSString* const kTGCacheVignetteKey = @"TGCacheVignetteKey";
     _photoView.clipsToBounds = YES;
     _photoView.image = _photo;
     
+    NSBundle *bundle = [NSBundle bundleForClass:self.class];
+    [_cancelButton setImage:[UIImage imageNamed:@"CameraBack" inBundle:bundle compatibleWithTraitCollection:nil] forState:UIControlStateNormal];
+    [_confirmButton setImage:[UIImage imageNamed:@"CameraShot" inBundle:bundle compatibleWithTraitCollection:nil] forState:UIControlStateNormal];
+    [_filterWandButton setImage:[UIImage imageNamed:@"CameraFilter" inBundle:bundle compatibleWithTraitCollection:nil] forState:UIControlStateNormal];
+
     if ([[TGCamera getOption:kTGCameraOptionHiddenFilterButton] boolValue] == YES) {
         _filterWandButton.hidden = YES;
     }
@@ -110,17 +117,6 @@ static NSString* const kTGCacheVignetteKey = @"TGCacheVignetteKey";
 - (BOOL)prefersStatusBarHidden
 {
     return YES;
-}
-
-- (void)dealloc
-{
-    _photoView = nil;
-    _bottomView = nil;
-    _filterView = nil;
-    _defaultFilterButton = nil;
-    _detailFilterView = nil;
-    _photo = nil;
-    _cachePhoto = nil;
 }
 
 #pragma mark -
@@ -256,7 +252,7 @@ static NSString* const kTGCacheVignetteKey = @"TGCacheVignetteKey";
 
 + (instancetype)newController
 {
-    return [super new];
+    return [[self alloc] initWithNibName:NSStringFromClass(self.class) bundle:[NSBundle bundleForClass:self.class]];
 }
 
 @end

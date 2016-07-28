@@ -8,8 +8,6 @@ build/*
 !default.mode2v3
 *.perspectivev3
 !default.perspectivev3
-*.xcworkspace
-!default.xcworkspace
 xcuserdata
 profile
 *.moved-aside
@@ -20,11 +18,6 @@ DerivedData
 .DS_Store
 profile
 *~
-*.lock
 *.DS_Store
 *.swp
 *.out
-
-# Cocoa Pods
-Pods/
-Podfile.lock

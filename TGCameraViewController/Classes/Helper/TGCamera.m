@@ -33,8 +33,6 @@
 
 NSMutableDictionary *optionDictionary;
 
-
-
 @interface TGCamera ()
 
 @property (strong, nonatomic) AVCaptureSession *session;
@@ -92,14 +90,6 @@ NSMutableDictionary *optionDictionary;
     }
     
     return nil;
-}
-
-- (void)dealloc
-{
-    _session = nil;
-    _previewLayer = nil;
-    _stillImageOutput = nil;
-    _gridView = nil;
 }
 
 #pragma mark -

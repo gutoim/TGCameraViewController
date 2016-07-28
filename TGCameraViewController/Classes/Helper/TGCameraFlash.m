@@ -84,7 +84,7 @@ UIImage *UIImageFromAVCaptureFlashMode(AVCaptureFlashMode mode)
 {
     NSArray *array = @[@"CameraFlashOff", @"CameraFlashOn", @"CameraFlashAuto"];
     NSString *imageName = [array objectAtIndex:mode];
-    return [UIImage imageNamed:imageName];
+    return [UIImage imageNamed:imageName inBundle:[NSBundle bundleForClass:NSClassFromString(@"TGCameraViewController")] compatibleWithTraitCollection:nil];
 }
 
 UIColor *TintColorFromAVCaptureFlashMode(AVCaptureFlashMode mode)
