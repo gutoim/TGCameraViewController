@@ -43,7 +43,7 @@
 + (instancetype)newWithCameraDelegate:(id<TGCameraDelegate>)delegate
 {
     TGCameraNavigationController *navigationController = [super new];
-    navigationController.navigationBarHidden = YES;
+//    navigationController.navigationBarHidden = YES;
     
     if (navigationController) {
         AVAuthorizationStatus status = [AVCaptureDevice authorizationStatusForMediaType:AVMediaTypeVideo];
@@ -70,13 +70,13 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    [[UIApplication sharedApplication] setStatusBarHidden:YES withAnimation:UIStatusBarAnimationFade];
+//    [[UIApplication sharedApplication] setStatusBarHidden:YES withAnimation:UIStatusBarAnimationFade];
 }
 
 - (void)viewWillDisappear:(BOOL)animated
 {
     [super viewWillDisappear:animated];
-    [[UIApplication sharedApplication] setStatusBarHidden:NO withAnimation:UIStatusBarAnimationFade];
+//    [[UIApplication sharedApplication] setStatusBarHidden:NO withAnimation:UIStatusBarAnimationFade];
 }
 
 - (BOOL)shouldAutorotate
