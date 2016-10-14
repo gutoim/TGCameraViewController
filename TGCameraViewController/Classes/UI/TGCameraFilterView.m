@@ -76,7 +76,8 @@
 - (void)addToView:(UIView *)view aboveView:(UIView *)aboveView
 {
     CGRect frame = self.frame;
-    frame.origin.y = CGRectGetMaxY(view.frame) - CGRectGetHeight(aboveView.frame);
+//    frame.origin.y = CGRectGetMaxY(view.frame) - CGRectGetHeight(aboveView.frame);
+    frame.origin.y = CGRectGetMinY(aboveView.frame);
     self.frame = frame;
     
     [view addSubview:self];
