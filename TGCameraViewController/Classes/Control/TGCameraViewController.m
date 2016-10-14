@@ -124,6 +124,8 @@
     
 //    [_closeButton setImage:[UIImage imageNamed:@"CameraClose" inBundle:bundle compatibleWithTraitCollection:nil] forState:UIControlStateNormal];
     [_shotButton setImage:[UIImage imageNamed:@"CameraShot" inBundle:bundle compatibleWithTraitCollection:nil] forState:UIControlStateNormal];
+    [_shotButton setCustomTintColorOverride:[UIColor grayColor]];
+    
 //    [_albumButton setImage:[UIImage imageNamed:@"CameraRoll" inBundle:bundle compatibleWithTraitCollection:nil] forState:UIControlStateNormal];
     [_gridButton setImage:[UIImage imageNamed:@"CameraGrid" inBundle:bundle compatibleWithTraitCollection:nil] forState:UIControlStateNormal];
     [_toggleButton setImage:[UIImage imageNamed:@"CameraToggle" inBundle:bundle compatibleWithTraitCollection:nil] forState:UIControlStateNormal];
