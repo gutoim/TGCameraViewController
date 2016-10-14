@@ -182,6 +182,18 @@ static NSString* const kTGCacheVignetteKey = @"TGCacheVignetteKey";
     }
 }
 
+- (IBAction)cancelFilterTapped
+{
+    // dismiss flter view
+    if ([_filterView isDescendantOfView:self.view]) {
+        [_filterView removeFromSuperviewAnimated];
+    }
+
+    // set default filter
+    [self addDetailViewToButton:self.defaultFilterButton];
+    _photoView.image = _photo;
+}
+
 #pragma mark -
 #pragma mark - Filter view actions
 

@@ -30,13 +30,6 @@
                 </imageView>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Wwe-hD-eWO" userLabel="Bottom View">
                     <subviews>
-                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="WAy-eH-OU9" userLabel="Back" customClass="TGTintedButton">
-                            <constraints>
-                                <constraint firstAttribute="height" constant="80" id="0Ms-p9-lfD"/>
-                                <constraint firstAttribute="width" constant="80" id="fWA-Gp-xvk"/>
-                            </constraints>
-                            <state key="normal" image="CameraBack"/>
-                        </button>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pc5-8R-lAJ" userLabel="Confirm" customClass="TGTintedButton">
                             <constraints>
                                 <constraint firstAttribute="height" constant="78" id="31h-nh-YvJ"/>
@@ -48,23 +41,12 @@
                             </connections>
                         </button>
                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="CameraCheckMark" translatesAutoresizingMaskIntoConstraints="NO" id="Scs-OK-XY9"/>
-                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bwi-ED-cl6" userLabel="Filter" customClass="TGTintedButton">
-                            <constraints>
-                                <constraint firstAttribute="height" constant="80" id="Qaz-63-vsp"/>
-                                <constraint firstAttribute="width" constant="80" id="uUY-8G-MhV"/>
-                            </constraints>
-                            <state key="normal" image="CameraFilter"/>
-                        </button>
                     </subviews>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <constraints>
-                        <constraint firstItem="WAy-eH-OU9" firstAttribute="leading" secondItem="Wwe-hD-eWO" secondAttribute="leading" constant="20" id="5hN-ie-9dy"/>
-                        <constraint firstAttribute="centerY" secondItem="bwi-ED-cl6" secondAttribute="centerY" id="I2p-r8-1NP"/>
-                        <constraint firstAttribute="trailing" secondItem="bwi-ED-cl6" secondAttribute="trailing" constant="20" id="IYO-SA-Jab"/>
                         <constraint firstItem="Scs-OK-XY9" firstAttribute="centerY" secondItem="pc5-8R-lAJ" secondAttribute="centerY" id="VPt-4s-DKt"/>
                         <constraint firstAttribute="centerY" secondItem="pc5-8R-lAJ" secondAttribute="centerY" id="YBr-qj-UwX"/>
                         <constraint firstAttribute="centerX" secondItem="pc5-8R-lAJ" secondAttribute="centerX" id="f74-Qt-Ptb"/>
-                        <constraint firstAttribute="centerY" secondItem="WAy-eH-OU9" secondAttribute="centerY" id="jly-9g-8s1"/>
                         <constraint firstItem="Scs-OK-XY9" firstAttribute="centerX" secondItem="pc5-8R-lAJ" secondAttribute="centerX" id="s1v-1h-l1J"/>
                     </constraints>
                 </view>
@@ -72,6 +54,9 @@
                     <subviews>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ftN-oB-Cbv" customClass="TGTintedButton">
                             <state key="normal" title="_CANCEL"/>
+                            <connections>
+                                <action selector="cancelFilterTapped" destination="-1" eventType="touchUpInside" id="8mb-gF-h53"/>
+                            </connections>
                         </button>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2xd-4c-Lha" customClass="TGTintedButton">
                             <state key="normal" title="_FILTER"/>
@@ -206,13 +191,11 @@
         </view>
     </objects>
     <resources>
-        <image name="CameraBack" width="26" height="26"/>
         <image name="CameraCheckMark" width="29" height="22"/>
         <image name="CameraEffectCurve" width="50" height="50"/>
         <image name="CameraEffectDefault" width="50" height="50"/>
         <image name="CameraEffectSature" width="50" height="50"/>
         <image name="CameraEffectVignette" width="50" height="50"/>
-        <image name="CameraFilter" width="41" height="41"/>
         <image name="CameraShot" width="78" height="78"/>
     </resources>
 </document>
