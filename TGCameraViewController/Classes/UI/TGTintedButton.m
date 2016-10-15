@@ -44,17 +44,11 @@
 - (void)setHighlighted:(BOOL)highlighted {
     
     if(highlighted) {
-//        self.backgroundColor = [UIColor colorWithRed:1 green:0.643 blue:0.282 alpha:1];
         [self setCustomTintColorOverride:[TGCameraColor tintColor]];
-
-        
     } else {
-//        self.backgroundColor = [UIColor colorWithRed:1 green:1 blue:1 alpha:1];
         [self setCustomTintColorOverride:[UIColor grayColor]];
-        
-        
-        
     }
+    
     [super setHighlighted:highlighted];
 }
 
