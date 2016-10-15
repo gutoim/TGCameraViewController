@@ -128,6 +128,7 @@
     
 //    [_albumButton setImage:[UIImage imageNamed:@"CameraRoll" inBundle:bundle compatibleWithTraitCollection:nil] forState:UIControlStateNormal];
     [_gridButton setImage:[UIImage imageNamed:@"CameraGrid" inBundle:bundle compatibleWithTraitCollection:nil] forState:UIControlStateNormal];
+    _gridButton.showTintColorWhenSelected = YES;
     
     [_toggleButton setImage:[UIImage imageNamed:@"CameraToggle" inBundle:bundle compatibleWithTraitCollection:nil] forState:UIControlStateNormal];
     _toggleButton.showTintColorWhenHighlighted = YES;
@@ -248,6 +249,8 @@
 
 - (IBAction)gridTapped
 {
+    _gridButton.selected = !_gridButton.selected;
+    
     [_camera disPlayGridView];
 }
 

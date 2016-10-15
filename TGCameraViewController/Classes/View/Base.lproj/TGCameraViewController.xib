@@ -124,7 +124,7 @@
                 </view>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Ni6-M2-hWT" userLabel="Actions View">
                     <subviews>
-                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Nol-dD-ETh" userLabel="Grid" customClass="TGTintedButton">
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageWhenHighlighted="NO" adjustsImageWhenDisabled="NO" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Nol-dD-ETh" userLabel="Grid" customClass="TGTintedButton">
                             <constraints>
                                 <constraint firstAttribute="height" constant="40" id="Aub-V9-12O"/>
                                 <constraint firstAttribute="width" constant="50" id="ivk-GF-mOZ"/>
