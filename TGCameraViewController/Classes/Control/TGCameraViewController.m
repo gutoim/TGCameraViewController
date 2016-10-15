@@ -124,11 +124,13 @@
     
 //    [_closeButton setImage:[UIImage imageNamed:@"CameraClose" inBundle:bundle compatibleWithTraitCollection:nil] forState:UIControlStateNormal];
     [_shotButton setImage:[UIImage imageNamed:@"CameraShot" inBundle:bundle compatibleWithTraitCollection:nil] forState:UIControlStateNormal];
-    [_shotButton setCustomTintColorOverride:[UIColor grayColor]];
+    _shotButton.showTintColorWhenHighlighted = YES;
     
 //    [_albumButton setImage:[UIImage imageNamed:@"CameraRoll" inBundle:bundle compatibleWithTraitCollection:nil] forState:UIControlStateNormal];
     [_gridButton setImage:[UIImage imageNamed:@"CameraGrid" inBundle:bundle compatibleWithTraitCollection:nil] forState:UIControlStateNormal];
+    
     [_toggleButton setImage:[UIImage imageNamed:@"CameraToggle" inBundle:bundle compatibleWithTraitCollection:nil] forState:UIControlStateNormal];
+    _toggleButton.showTintColorWhenHighlighted = YES;
     
     _camera = [TGCamera cameraWithFlashButton:_flashButton];
     

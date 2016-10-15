@@ -15,8 +15,14 @@
 
 @end
 
-
 @implementation TGTintedButton
+
+- (void)setShowTintColorWhenHighlighted:(BOOL)showTintColorWhenHighlighted {
+    if (showTintColorWhenHighlighted) {
+        [self setCustomTintColorOverride:[TGCameraColor tintGrayColor]];
+    }
+    _showTintColorWhenHighlighted = showTintColorWhenHighlighted;
+}
 
 - (void)setNeedsLayout {
     [super setNeedsLayout];
@@ -43,10 +49,12 @@
 
 - (void)setHighlighted:(BOOL)highlighted {
     
-    if(highlighted) {
-        [self setCustomTintColorOverride:[TGCameraColor tintColor]];
-    } else {
-        [self setCustomTintColorOverride:[UIColor grayColor]];
+    if (_showTintColorWhenHighlighted) {
+        if (highlighted) {
+            [self setCustomTintColorOverride:[TGCameraColor tintColor]];
+        } else {
+            [self setCustomTintColorOverride:[TGCameraColor tintGrayColor]];
+        }
     }
     
     [super setHighlighted:highlighted];

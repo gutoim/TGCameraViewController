@@ -12,5 +12,6 @@
 
 @property (nonatomic, strong) UIColor *customTintColorOverride;
 @property (nonatomic, assign) BOOL disableTint;
+@property (nonatomic, assign) BOOL showTintColorWhenHighlighted;
 
 @end

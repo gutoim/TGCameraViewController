@@ -29,5 +29,7 @@
 
 + (void)setTintColor:(UIColor *)tintColor;
 + (UIColor *)tintColor;
++ (void)setTintGrayColor:(UIColor *)tintGrayColor;
++ (UIColor *)tintGrayColor;
 
 @end
