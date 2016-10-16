@@ -138,7 +138,7 @@
     
     _separatorView.hidden = NO;
     
-    _actionsView.hidden = YES;
+//    _actionsView.hidden = YES;
     
     _topLeftView.hidden =
     _topRightView.hidden =
@@ -167,7 +167,7 @@
         _bottomLeftView.hidden =
         _bottomRightView.hidden = NO;
         
-        _actionsView.hidden = NO;
+//        _actionsView.hidden = NO;
         
         _gridButton.enabled =
         _toggleButton.enabled =
@@ -350,7 +350,7 @@
 
 - (void)viewWillDisappearWithCompletion:(void (^)(void))completion
 {
-    _actionsView.hidden = YES;
+//    _actionsView.hidden = YES;
     
     [TGCameraSlideView showSlideUpView:_slideUpView slideDownView:_slideDownView atView:_captureView completion:^{
         completion();
