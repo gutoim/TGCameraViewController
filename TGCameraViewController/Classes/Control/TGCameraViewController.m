@@ -38,16 +38,13 @@
 @property (strong, nonatomic) IBOutlet UIImageView *bottomRightView;
 @property (strong, nonatomic) IBOutlet UIView *separatorView;
 @property (strong, nonatomic) IBOutlet UIView *actionsView;
-//@property (strong, nonatomic) IBOutlet TGTintedButton *closeButton;
 @property (strong, nonatomic) IBOutlet TGTintedButton *gridButton;
 @property (strong, nonatomic) IBOutlet TGTintedButton *toggleButton;
 @property (strong, nonatomic) IBOutlet TGTintedButton *shotButton;
-//@property (strong, nonatomic) IBOutlet TGTintedButton *albumButton;
 @property (strong, nonatomic) IBOutlet UIButton *flashButton;
 @property (strong, nonatomic) IBOutlet TGCameraSlideView *slideUpView;
 @property (strong, nonatomic) IBOutlet TGCameraSlideView *slideDownView;
 
-//@property (weak, nonatomic) IBOutlet NSLayoutConstraint *topViewHeight;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *toggleButtonWidth;
 
 @property (strong, nonatomic) TGCamera *camera;
@@ -67,8 +64,6 @@
 
 @end
 
-
-
 @implementation TGCameraViewController
 
 - (instancetype)init
@@ -79,10 +74,6 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    
-//    if (CGRectGetHeight([[UIScreen mainScreen] bounds]) <= 480) {
-//        _topViewHeight.constant = 0;
-//    }
     
     NSArray *devices = [AVCaptureDevice devicesWithMediaType:AVMediaTypeVideo];
     if (devices.count > 1) {
@@ -100,7 +91,6 @@
         }
     }
     
-    
     NSBundle *bundle = [NSBundle bundleForClass:self.class];
     
     UIImage *cameraCloseImage = [UIImage imageNamed:@"CameraClose" inBundle:bundle compatibleWithTraitCollection:nil];
@@ -109,9 +99,8 @@
                                                                             target:self
                                                                             action:@selector(closeTapped)];
 
-    if ([[TGCamera getOption:kTGCameraOptionHiddenAlbumButton] boolValue] == YES) {
-//        _albumButton.hidden = YES;
-    } else {
+    if (![[TGCamera getOption:kTGCameraOptionHiddenAlbumButton] boolValue]) {
+        
         UIImage *cameraRollImage = [UIImage imageNamed:@"CameraRoll" inBundle:bundle compatibleWithTraitCollection:nil];
         self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithImage:cameraRollImage
                                                                                   style:UIBarButtonItemStylePlain
@@ -119,14 +108,9 @@
                                                                                  action:@selector(albumTapped)];
     }
     
-//    [_albumButton.layer setCornerRadius:10.f];
-//    [_albumButton.layer setMasksToBounds:YES];
-    
-//    [_closeButton setImage:[UIImage imageNamed:@"CameraClose" inBundle:bundle compatibleWithTraitCollection:nil] forState:UIControlStateNormal];
     [_shotButton setImage:[UIImage imageNamed:@"CameraShot" inBundle:bundle compatibleWithTraitCollection:nil] forState:UIControlStateNormal];
     _shotButton.showTintColorWhenHighlighted = YES;
     
-//    [_albumButton setImage:[UIImage imageNamed:@"CameraRoll" inBundle:bundle compatibleWithTraitCollection:nil] forState:UIControlStateNormal];
     [_gridButton setImage:[UIImage imageNamed:@"CameraGrid" inBundle:bundle compatibleWithTraitCollection:nil] forState:UIControlStateNormal];
     _gridButton.showTintColorWhenSelected = YES;
     
@@ -164,7 +148,6 @@
     _gridButton.enabled =
     _toggleButton.enabled =
     _shotButton.enabled =
-//    _albumButton.enabled =
     _flashButton.enabled = NO;
     
     [_camera startRunning];
@@ -189,7 +172,6 @@
         _gridButton.enabled =
         _toggleButton.enabled =
         _shotButton.enabled =
-//        _albumButton.enabled =
         _flashButton.enabled = YES;
     }];
     
@@ -262,7 +244,6 @@
 - (IBAction)shotTapped
 {
     _shotButton.enabled = NO;
-//    _albumButton.enabled = NO;
     
     UIDeviceOrientation deviceOrientation = [[UIDevice currentDevice] orientation];
     AVCaptureVideoOrientation videoOrientation = [self videoOrientationForDeviceOrientation:deviceOrientation];
@@ -290,7 +271,6 @@
 - (IBAction)albumTapped
 {
     _shotButton.enabled = NO;
-//    _albumButton.enabled = NO;
     
     [self viewWillDisappearWithCompletion:^{
         UIImagePickerController *pickerController = [TGAlbum imagePickerControllerWithDelegate:self];
@@ -344,7 +324,6 @@
     [UIView animateWithDuration:.5f animations:^{
         _gridButton.transform =
         _toggleButton.transform =
-//        _albumButton.transform =
         _flashButton.transform = transform;
     }];
 }

@@ -11,15 +11,16 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="TGPhotoViewController">
             <connections>
                 <outlet property="bottomView" destination="Wwe-hD-eWO" id="phi-0I-kq7"/>
+                <outlet property="cancelFilterButton" destination="y9K-3m-Kff" id="ewo-O2-FgB"/>
                 <outlet property="confirmButton" destination="pc5-8R-lAJ" id="q8l-oT-qHT"/>
                 <outlet property="defaultFilterButton" destination="9jP-uX-c4U" id="AEq-cV-Ah8"/>
+                <outlet property="filterButton" destination="Unb-6L-cFN" id="d2I-UI-1GV"/>
                 <outlet property="filterView" destination="mfq-V7-07J" id="Pf2-0x-IU7"/>
-                <outlet property="filterWandButton" destination="2xd-4c-Lha" id="bg1-6x-J4W"/>
                 <outlet property="photoView" destination="AgS-wg-ici" id="7RM-EQ-xh7"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
-        <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT" userLabel="View Controller">
+        <view contentMode="scaleToFill" id="i5M-Pr-FkT">
             <rect key="frame" x="0.0" y="0.0" width="600" height="820"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
@@ -30,7 +31,7 @@
                 </imageView>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Wwe-hD-eWO" userLabel="Bottom View">
                     <subviews>
-                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pc5-8R-lAJ" userLabel="Confirm" customClass="TGTintedButton">
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageWhenHighlighted="NO" adjustsImageWhenDisabled="NO" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pc5-8R-lAJ" userLabel="Confirm" customClass="TGTintedButton">
                             <constraints>
                                 <constraint firstAttribute="height" constant="78" id="31h-nh-YvJ"/>
                                 <constraint firstAttribute="width" constant="78" id="ltH-g3-jMC"/>
@@ -50,46 +51,56 @@
                         <constraint firstItem="Scs-OK-XY9" firstAttribute="centerX" secondItem="pc5-8R-lAJ" secondAttribute="centerX" id="s1v-1h-l1J"/>
                     </constraints>
                 </view>
-                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ubt-nz-mqT" userLabel="Actions View">
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="F8a-UR-bkx">
                     <subviews>
-                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ftN-oB-Cbv" customClass="TGTintedButton">
-                            <state key="normal" title="_CANCEL"/>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageWhenHighlighted="NO" adjustsImageWhenDisabled="NO" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="y9K-3m-Kff">
+                            <constraints>
+                                <constraint firstAttribute="height" constant="50" id="WNT-BG-NJj"/>
+                            </constraints>
+                            <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                            <state key="normal" title="_CANCEL">
+                                <color key="titleColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                            </state>
                             <connections>
-                                <action selector="cancelFilterTapped" destination="-1" eventType="touchUpInside" id="8mb-gF-h53"/>
+                                <action selector="cancelFilterTapped:" destination="-1" eventType="touchUpInside" id="xIF-nu-2oG"/>
                             </connections>
                         </button>
-                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2xd-4c-Lha" customClass="TGTintedButton">
-                            <state key="normal" title="_FILTER"/>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageWhenHighlighted="NO" adjustsImageWhenDisabled="NO" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Unb-6L-cFN">
+                            <constraints>
+                                <constraint firstAttribute="height" constant="50" id="MQE-39-pOc"/>
+                            </constraints>
+                            <state key="normal" title="_FILTER">
+                                <color key="titleColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                            </state>
                             <connections>
-                                <action selector="filtersTapped" destination="-1" eventType="touchUpInside" id="Ofl-BU-hZv"/>
+                                <action selector="filtersTapped:" destination="-1" eventType="touchUpInside" id="sBn-sd-uZa"/>
                             </connections>
                         </button>
                     </subviews>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <constraints>
-                        <constraint firstAttribute="trailing" secondItem="2xd-4c-Lha" secondAttribute="trailing" id="5w2-2D-pb9"/>
-                        <constraint firstAttribute="height" constant="50" id="AmE-W0-HE1"/>
-                        <constraint firstItem="ftN-oB-Cbv" firstAttribute="leading" secondItem="ubt-nz-mqT" secondAttribute="leading" id="Ca8-a8-rcm"/>
-                        <constraint firstItem="ftN-oB-Cbv" firstAttribute="width" secondItem="ubt-nz-mqT" secondAttribute="width" multiplier="1:2" id="cHz-EU-wlf"/>
-                        <constraint firstItem="2xd-4c-Lha" firstAttribute="centerY" secondItem="ubt-nz-mqT" secondAttribute="centerY" id="tLu-rg-qBs"/>
-                        <constraint firstItem="ftN-oB-Cbv" firstAttribute="centerY" secondItem="ubt-nz-mqT" secondAttribute="centerY" id="viZ-Oo-8Nh"/>
-                        <constraint firstItem="2xd-4c-Lha" firstAttribute="width" secondItem="ubt-nz-mqT" secondAttribute="width" multiplier="1:2" id="wHr-1S-zh1"/>
+                        <constraint firstAttribute="height" constant="50" id="HlR-ab-qEl"/>
+                        <constraint firstItem="y9K-3m-Kff" firstAttribute="width" secondItem="F8a-UR-bkx" secondAttribute="width" multiplier="1:2" id="LnQ-QZ-z2d"/>
+                        <constraint firstItem="Unb-6L-cFN" firstAttribute="width" secondItem="F8a-UR-bkx" secondAttribute="width" multiplier="1:2" id="TFa-T6-lWm"/>
+                        <constraint firstItem="Unb-6L-cFN" firstAttribute="centerY" secondItem="F8a-UR-bkx" secondAttribute="centerY" id="UrU-Bh-8WA"/>
+                        <constraint firstItem="y9K-3m-Kff" firstAttribute="centerY" secondItem="F8a-UR-bkx" secondAttribute="centerY" id="Zpm-gF-fQi"/>
+                        <constraint firstItem="y9K-3m-Kff" firstAttribute="leading" secondItem="F8a-UR-bkx" secondAttribute="leading" id="iSY-5e-bHg"/>
+                        <constraint firstAttribute="trailing" secondItem="Unb-6L-cFN" secondAttribute="trailing" id="qMQ-XL-fjR"/>
                     </constraints>
                 </view>
             </subviews>
             <color key="backgroundColor" red="0.1176470588" green="0.1176470588" blue="0.1176470588" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-            <color key="tintColor" red="0.98755216598510742" green="0.26285848021507263" blue="0.032961577177047729" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
                 <constraint firstItem="AgS-wg-ici" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="Az4-RI-dx8"/>
+                <constraint firstItem="F8a-UR-bkx" firstAttribute="top" secondItem="Wwe-hD-eWO" secondAttribute="bottom" id="C3s-KE-5V0"/>
                 <constraint firstItem="Wwe-hD-eWO" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="DxI-HU-wrS"/>
-                <constraint firstItem="ubt-nz-mqT" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="L4g-Gm-enY"/>
-                <constraint firstAttribute="bottom" secondItem="ubt-nz-mqT" secondAttribute="bottom" id="S6T-XK-Z7w"/>
+                <constraint firstAttribute="bottom" secondItem="F8a-UR-bkx" secondAttribute="bottom" id="OEf-Wm-H9F"/>
                 <constraint firstAttribute="trailing" secondItem="Wwe-hD-eWO" secondAttribute="trailing" id="XPd-3d-1vb"/>
                 <constraint firstAttribute="trailing" secondItem="AgS-wg-ici" secondAttribute="trailing" id="Yh2-Fi-Eoj"/>
-                <constraint firstAttribute="trailing" secondItem="ubt-nz-mqT" secondAttribute="trailing" id="djh-Dk-S9F"/>
                 <constraint firstItem="AgS-wg-ici" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="hkD-sN-pSG"/>
                 <constraint firstItem="Wwe-hD-eWO" firstAttribute="top" secondItem="AgS-wg-ici" secondAttribute="bottom" id="jSq-PJ-4G4"/>
-                <constraint firstItem="Wwe-hD-eWO" firstAttribute="bottom" secondItem="ubt-nz-mqT" secondAttribute="top" id="rs7-gq-ozM"/>
+                <constraint firstItem="F8a-UR-bkx" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="qtp-jY-daR"/>
+                <constraint firstAttribute="trailing" secondItem="F8a-UR-bkx" secondAttribute="trailing" id="yQ6-6V-E8Y"/>
             </constraints>
             <nil key="simulatedStatusBarMetrics"/>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>

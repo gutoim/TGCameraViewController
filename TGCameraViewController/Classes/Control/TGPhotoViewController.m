@@ -35,19 +35,18 @@ static NSString* const kTGCacheSatureKey = @"TGCacheSatureKey";
 static NSString* const kTGCacheCurveKey = @"TGCacheCurveKey";
 static NSString* const kTGCacheVignetteKey = @"TGCacheVignetteKey";
 
-
-
 @interface TGPhotoViewController ()
 
 @property (strong, nonatomic) IBOutlet UIImageView *photoView;
 @property (strong, nonatomic) IBOutlet UIView *bottomView;
+
 @property (strong, nonatomic) IBOutlet TGCameraFilterView *filterView;
 @property (strong, nonatomic) IBOutlet UIButton *defaultFilterButton;
-@property (weak, nonatomic) IBOutlet TGTintedButton *filterWandButton;
-@property (weak, nonatomic) IBOutlet TGTintedButton *cancelButton;
-@property (weak, nonatomic) IBOutlet TGTintedButton *confirmButton;
 
-//@property (weak, nonatomic) IBOutlet NSLayoutConstraint *topViewHeight;
+@property (weak, nonatomic) IBOutlet UIButton *cancelFilterButton;
+@property (weak, nonatomic) IBOutlet UIButton *filterButton;
+
+@property (weak, nonatomic) IBOutlet TGTintedButton *confirmButton;
 
 @property (weak) id<TGCameraDelegate> delegate;
 @property (strong, nonatomic) UIView *detailFilterView;
@@ -69,8 +68,6 @@ static NSString* const kTGCacheVignetteKey = @"TGCacheVignetteKey";
 
 @end
 
-
-
 @implementation TGPhotoViewController
 
 + (instancetype)newWithDelegate:(id<TGCameraDelegate>)delegate photo:(UIImage *)photo
@@ -90,21 +87,16 @@ static NSString* const kTGCacheVignetteKey = @"TGCacheVignetteKey";
 {
     [super viewDidLoad];
     
-//    if (CGRectGetHeight([[UIScreen mainScreen] bounds]) <= 480) {
-//        _topViewHeight.constant = 0;
-//    }
+    [self.cancelFilterButton setTitleColor:[UIColor redColor] forState:UIControlStateHighlighted];
+    [self.filterButton setTitleColor:[TGCameraColor tintColor] forState:UIControlStateHighlighted];
     
     _photoView.clipsToBounds = YES;
     _photoView.image = _photo;
     
     NSBundle *bundle = [NSBundle bundleForClass:self.class];
-    [_cancelButton setImage:[UIImage imageNamed:@"CameraBack" inBundle:bundle compatibleWithTraitCollection:nil] forState:UIControlStateNormal];
+   
     [_confirmButton setImage:[UIImage imageNamed:@"CameraShot" inBundle:bundle compatibleWithTraitCollection:nil] forState:UIControlStateNormal];
-//    [_filterWandButton setImage:[UIImage imageNamed:@"CameraFilter" inBundle:bundle compatibleWithTraitCollection:nil] forState:UIControlStateNormal];
-
-//    if ([[TGCamera getOption:kTGCameraOptionHiddenFilterButton] boolValue] == YES) {
-//        _filterWandButton.hidden = YES;
-//    }
+    _confirmButton.showTintColorWhenHighlighted = YES;
     
     [self addDetailViewToButton:_defaultFilterButton];
 }
@@ -171,7 +163,7 @@ static NSString* const kTGCacheVignetteKey = @"TGCacheVignetteKey";
     }
 }
 
-- (IBAction)filtersTapped
+- (IBAction)filtersTapped:(id)sender
 {
     if ([_filterView isDescendantOfView:self.view]) {
         [_filterView removeFromSuperviewAnimated];
@@ -182,7 +174,7 @@ static NSString* const kTGCacheVignetteKey = @"TGCacheVignetteKey";
     }
 }
 
-- (IBAction)cancelFilterTapped
+- (IBAction)cancelFilterTapped:(id)sender
 {
     // dismiss flter view
     if ([_filterView isDescendantOfView:self.view]) {
@@ -239,7 +231,6 @@ static NSString* const kTGCacheVignetteKey = @"TGCacheVignetteKey";
         _photoView.image = [_cachePhoto objectForKey:kTGCacheVignetteKey];
     }
 }
-
 
 #pragma mark -
 #pragma mark - Private methods
