@@ -93,7 +93,7 @@
     
     NSBundle *bundle = [NSBundle bundleForClass:self.class];
     
-    UIImage *cameraCloseImage = [UIImage imageNamed:@"CameraClose" inBundle:bundle compatibleWithTraitCollection:nil];
+    UIImage *cameraCloseImage = [UIImage imageNamed:@"camera_close" inBundle:bundle compatibleWithTraitCollection:nil];
     self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithImage:cameraCloseImage
                                                                              style:UIBarButtonItemStylePlain
                                                                             target:self
@@ -101,7 +101,7 @@
 
     if (![[TGCamera getOption:kTGCameraOptionHiddenAlbumButton] boolValue]) {
         
-        UIImage *cameraRollImage = [UIImage imageNamed:@"CameraRoll" inBundle:bundle compatibleWithTraitCollection:nil];
+        UIImage *cameraRollImage = [UIImage imageNamed:@"camera_gallery" inBundle:bundle compatibleWithTraitCollection:nil];
         self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithImage:cameraRollImage
                                                                                   style:UIBarButtonItemStylePlain
                                                                                  target:self
@@ -111,10 +111,10 @@
     [_shotButton setImage:[UIImage imageNamed:@"CameraShot" inBundle:bundle compatibleWithTraitCollection:nil] forState:UIControlStateNormal];
     _shotButton.showTintColorWhenHighlighted = YES;
     
-    [_gridButton setImage:[UIImage imageNamed:@"CameraGrid" inBundle:bundle compatibleWithTraitCollection:nil] forState:UIControlStateNormal];
+    [_gridButton setImage:[UIImage imageNamed:@"camera_grid" inBundle:bundle compatibleWithTraitCollection:nil] forState:UIControlStateNormal];
     _gridButton.showTintColorWhenSelected = YES;
     
-    [_toggleButton setImage:[UIImage imageNamed:@"CameraToggle" inBundle:bundle compatibleWithTraitCollection:nil] forState:UIControlStateNormal];
+    [_toggleButton setImage:[UIImage imageNamed:@"camera_switch" inBundle:bundle compatibleWithTraitCollection:nil] forState:UIControlStateNormal];
     _toggleButton.showTintColorWhenHighlighted = YES;
     
     _camera = [TGCamera cameraWithFlashButton:_flashButton];
