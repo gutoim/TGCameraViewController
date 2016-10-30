@@ -87,7 +87,17 @@ static NSString* const kTGCacheVignetteKey = @"TGCacheVignetteKey";
 {
     [super viewDidLoad];
     
+    UIFont *buttonFont = [UIFont fontWithName:@"Roboto Bold" size:13.5];
+    
+    // TODO
+    // button color
+    
+    self.cancelFilterButton.titleLabel.font = buttonFont;
+    [self.cancelFilterButton setTitle:@"Cancel" forState:UIControlStateNormal];
     [self.cancelFilterButton setTitleColor:[UIColor redColor] forState:UIControlStateHighlighted];
+    
+    self.filterButton.titleLabel.font = buttonFont;
+    [self.filterButton setTitle:@"Filter" forState:UIControlStateNormal];
     [self.filterButton setTitleColor:[TGCameraColor tintColor] forState:UIControlStateHighlighted];
     
     _photoView.clipsToBounds = YES;
