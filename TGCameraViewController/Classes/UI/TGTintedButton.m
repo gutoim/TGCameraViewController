@@ -15,8 +15,21 @@
 
 @end
 
-
 @implementation TGTintedButton
+
+- (void)setShowTintColorWhenHighlighted:(BOOL)showTintColorWhenHighlighted {
+    if (showTintColorWhenHighlighted) {
+        [self setCustomTintColorOverride:[TGCameraColor tintGrayColor]];
+    }
+    _showTintColorWhenHighlighted = showTintColorWhenHighlighted;
+}
+
+- (void)setShowTintColorWhenSelected:(BOOL)showTintColorWhenSelected {
+    if (showTintColorWhenSelected) {
+        [self setCustomTintColorOverride:[TGCameraColor tintGrayColor]];
+    }
+    _showTintColorWhenSelected = showTintColorWhenSelected;
+}
 
 - (void)setNeedsLayout {
     [super setNeedsLayout];
@@ -36,10 +49,36 @@
     if (state != UIControlStateNormal) {
         return;
     }
+    
     UIImageRenderingMode renderingMode = self.disableTint ? UIImageRenderingModeAlwaysOriginal : UIImageRenderingModeAlwaysTemplate;
     [super setImage:[image imageWithRenderingMode:renderingMode] forState:state];
 }
 
+- (void)setHighlighted:(BOOL)highlighted {
+    
+    if (_showTintColorWhenHighlighted) {
+        if (highlighted) {
+            [self setCustomTintColorOverride:[TGCameraColor tintColor]];
+        } else {
+            [self setCustomTintColorOverride:[TGCameraColor tintGrayColor]];
+        }
+    }
+    
+    [super setHighlighted:highlighted];
+}
+
+- (void)setSelected:(BOOL)selected {
+    
+    if (_showTintColorWhenSelected) {
+        if (selected) {
+            [self setCustomTintColorOverride:[TGCameraColor tintColor]];
+        } else {
+            [self setCustomTintColorOverride:[TGCameraColor tintGrayColor]];
+        }
+    }
+    
+    [super setSelected:selected];
+}
 
 - (void)updateTintIfNeeded {
     UIColor *color = self.customTintColorOverride != nil ? self.customTintColorOverride : [TGCameraColor tintColor];

@@ -26,12 +26,13 @@
 #import "TGCameraColor.h"
 
 static UIColor *staticTintColor = nil;
+static UIColor *staticTintGrayColor = nil;
+
 @interface TGCameraColor()
 
 + (UIColor *)colorWithRed:(CGFloat)red green:(CGFloat)green blue:(CGFloat)blue;
 
 @end
-
 
 @implementation TGCameraColor
 
@@ -39,14 +40,21 @@ static UIColor *staticTintColor = nil;
     staticTintColor = tintColor;
 }
 
++(void)setTintGrayColor:(UIColor*)tintGrayColor {
+    staticTintGrayColor = tintGrayColor;
+}
+
 + (UIColor *)grayColor
 {
     return [self colorWithRed:200 green:200 blue:200];
 }
 
-+ (UIColor *)tintColor
-{
++ (UIColor *)tintColor {
     return staticTintColor != nil ? staticTintColor : [self colorWithRed:255 green:91 blue:1];
+}
+
++ (UIColor *)tintGrayColor {
+    return staticTintGrayColor != nil ? staticTintGrayColor : [self colorWithRed:200 green:200 blue:200];
 }
 
 + (UIColor *)colorWithRed:(CGFloat)red green:(CGFloat)green blue:(CGFloat)blue
