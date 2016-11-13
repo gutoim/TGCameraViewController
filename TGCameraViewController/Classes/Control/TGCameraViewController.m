@@ -27,7 +27,7 @@
 #import "TGPhotoViewController.h"
 #import "TGCameraSlideView.h"
 #import "TGTintedButton.h"
-
+#import "UIColor+WFDColors.h"
 
 @interface TGCameraViewController () <UIImagePickerControllerDelegate, UINavigationControllerDelegate>
 
@@ -37,6 +37,7 @@
 @property (strong, nonatomic) IBOutlet UIImageView *bottomLeftView;
 @property (strong, nonatomic) IBOutlet UIImageView *bottomRightView;
 @property (strong, nonatomic) IBOutlet UIView *separatorView;
+@property (strong, nonatomic) IBOutlet UIView *bottomView;
 @property (strong, nonatomic) IBOutlet UIView *actionsView;
 @property (strong, nonatomic) IBOutlet TGTintedButton *gridButton;
 @property (strong, nonatomic) IBOutlet TGTintedButton *toggleButton;
@@ -125,6 +126,9 @@
     _topRightView.transform = CGAffineTransformMakeRotation(M_PI_2);
     _bottomLeftView.transform = CGAffineTransformMakeRotation(-M_PI_2);
     _bottomRightView.transform = CGAffineTransformMakeRotation(M_PI_2*2);
+    
+    _bottomView.backgroundColor = [UIColor wfd_gray10];
+    _actionsView.backgroundColor = [UIColor wfd_gray10];
 }
 
 - (void)viewWillAppear:(BOOL)animated
