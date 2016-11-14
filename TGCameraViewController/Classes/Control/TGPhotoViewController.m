@@ -106,7 +106,7 @@ static NSString* const kTGCacheVignetteKey = @"TGCacheVignetteKey";
     
     NSBundle *bundle = [NSBundle bundleForClass:self.class];
    
-    [_confirmButton setImage:[UIImage imageNamed:@"CameraShot" inBundle:bundle compatibleWithTraitCollection:nil] forState:UIControlStateNormal];
+    [_confirmButton setImage:[UIImage imageNamed:@"camera_shot" inBundle:bundle compatibleWithTraitCollection:nil] forState:UIControlStateNormal];
     _confirmButton.showTintColorWhenHighlighted = YES;
     
     [self addDetailViewToButton:_defaultFilterButton];

@@ -109,7 +109,7 @@
                                                                                  action:@selector(albumTapped)];
     }
     
-    [_shotButton setImage:[UIImage imageNamed:@"CameraShot" inBundle:bundle compatibleWithTraitCollection:nil] forState:UIControlStateNormal];
+    [_shotButton setImage:[UIImage imageNamed:@"camera_shot" inBundle:bundle compatibleWithTraitCollection:nil] forState:UIControlStateNormal];
     _shotButton.showTintColorWhenHighlighted = YES;
     
     [_gridButton setImage:[UIImage imageNamed:@"camera_grid" inBundle:bundle compatibleWithTraitCollection:nil] forState:UIControlStateNormal];
