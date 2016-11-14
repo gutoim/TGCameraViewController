@@ -129,6 +129,9 @@
     
     _bottomView.backgroundColor = [UIColor wfd_gray10];
     _actionsView.backgroundColor = [UIColor wfd_gray10];
+    
+    // set empty back navigation item
+    self.navigationItem.backBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"" style:UIBarButtonItemStylePlain target:nil action:nil];
 }
 
 - (void)viewWillAppear:(BOOL)animated

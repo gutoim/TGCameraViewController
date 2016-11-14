@@ -30,6 +30,8 @@
 #import "TGCameraFilterView.h"
 #import "UIImage+CameraFilters.h"
 #import "TGTintedButton.h"
+#import "UIColor+WFDColors.h"
+#import "UIFont+WFDFonts.h"
 
 static NSString* const kTGCacheSatureKey = @"TGCacheSatureKey";
 static NSString* const kTGCacheCurveKey = @"TGCacheCurveKey";
@@ -87,17 +89,16 @@ static NSString* const kTGCacheVignetteKey = @"TGCacheVignetteKey";
 {
     [super viewDidLoad];
     
-    UIFont *buttonFont = [UIFont fontWithName:@"Roboto Bold" size:13.5];
-    
-    // TODO
-    // button color
-    
+    UIFont *buttonFont = [UIFont wfd_fontOfSize:13.5];
+        
     self.cancelFilterButton.titleLabel.font = buttonFont;
     [self.cancelFilterButton setTitle:@"Cancel" forState:UIControlStateNormal];
-    [self.cancelFilterButton setTitleColor:[UIColor redColor] forState:UIControlStateHighlighted];
+    [self.cancelFilterButton setTitleColor:[TGCameraColor tintGrayColor] forState:UIControlStateNormal];
+    [self.cancelFilterButton setTitleColor:[TGCameraColor tintColor] forState:UIControlStateHighlighted];
     
     self.filterButton.titleLabel.font = buttonFont;
     [self.filterButton setTitle:@"Filter" forState:UIControlStateNormal];
+    [self.filterButton setTitleColor:[TGCameraColor tintGrayColor] forState:UIControlStateNormal];
     [self.filterButton setTitleColor:[TGCameraColor tintColor] forState:UIControlStateHighlighted];
     
     _photoView.clipsToBounds = YES;
@@ -109,6 +110,9 @@ static NSString* const kTGCacheVignetteKey = @"TGCacheVignetteKey";
     _confirmButton.showTintColorWhenHighlighted = YES;
     
     [self addDetailViewToButton:_defaultFilterButton];
+    
+    // set empty back navigation item
+    self.navigationItem.backBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"" style:UIBarButtonItemStylePlain target:nil action:nil];
 }
 
 - (void)didReceiveMemoryWarning
